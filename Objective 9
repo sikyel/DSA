@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class LinearSearch {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        // Step 4: Input the number of elements
+        System.out.print("Enter number of elements: ");
+        int n = in.nextInt();
+
+        // Step 6: Creating array to store the numbers
+        int[] array = new int[n];
+
+        // Step 4 (continued): Input array elements
+        System.out.println("Enter " + n + " integers:");
+        for (int i = 0; i < n; i++) {
+            array[i] = in.nextInt();
+        }
+
+        // Step 7: Input the element to search for
+        System.out.print("Enter value to find: ");
+        int search = in.nextInt();
+
+        // Step 7: Searching the array for the element
+        boolean found = false;
+        for (int c = 0; c < n; c++) {
+            if (array[c] == search) {
+                System.out.println(search + " is present at location " + (c + 1));
+                found = true;
+                break;
+            }
+        }
+
+        // Step 8: Element not found
+        if (!found) {
+            System.out.println(search + " isn't present in the array.");
+        }
+
+        // Step 9: Stop
+        in.close();
+    }
+}
