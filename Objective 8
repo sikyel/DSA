@@ -1,0 +1,197 @@
+import java.io.*;
+
+// Class representing the node of a doubly linked list
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+// Class representing the doubly linked list (Deque implementation)
+class DoubleLinkedList {
+    private Node first;
+    private Node last;
+
+    // Constructor to initialize the deque
+    public DoubleLinkedList() {
+        first = null;
+        last = null;
+    }
+
+    // Insert element at the front of the deque
+    public void insertAtFront(int data) {
+        Node newNode = new Node(data);
+        if (first == null) {
+            first = last = newNode;
+        } else {
+            newNode.next = first;
+            first.prev = newNode;
+            first = newNode;
+        }
+        System.out.println("Inserted to Front: " + data);
+    }
+
+    // Insert element at the rear of the deque
+    public void insertAtRear(int data) {
+        Node newNode = new Node(data);
+        if (last == null) {
+            first = last = newNode;
+        } else {
+            newNode.prev = last;
+            last.next = newNode;
+            last = newNode;
+        }
+        System.out.println("Inserted to Rear: " + data);
+    }
+
+    // Delete element from the front of the deque
+    public void deleteFromFront() {
+        if (first == null) {
+            System.out.println("Deque is empty!");
+        } else {
+            System.out.println("Deleted from Front: " + first.data);
+            first = first.next;
+            if (first != null) {
+                first.prev = null;
+            } else {
+                last = null; // List becomes empty
+            }
+        }
+    }
+
+    // Delete element from the rear of the deque
+    public void deleteFromRear() {
+        if (last == null) {
+            System.out.println("Deque is empty!");
+        } else {
+            System.out.println("Deleted from Rear: " + last.data);
+            last = last.prev;
+            if (last != null) {
+                last.next = null;
+            } else {
+                first = null; // List becomes empty
+            }
+        }
+    }
+
+    // Display deque elements from front to rear
+    public void displayFromFront() {
+        if (first == null) {
+            System.out.println("Deque is empty!");
+        } else {
+            System.out.print("Deque from Front: ");
+            Node current = first;
+            while (current != null) {
+                System.out.print(current.data + " ");
+                current = current.next;
+            }
+            System.out.println();
+        }
+    }
+
+    // Display deque elements from rear to front
+    public void displayFromRear() {
+        if (last == null) {
+            System.out.println("Deque is empty!");
+        } else {
+            System.out.print("Deque from Rear: ");
+            Node current = last;
+            while (current != null) {
+                System.out.print(current.data + " ");
+                current = current.prev;
+            }
+            System.out.println();
+        }
+    }
+}
+
+// Class to manage Deque operations
+class Deque {
+    private DoubleLinkedList deque = new DoubleLinkedList();
+
+    // Insert at front
+    public void insertFront(int data) {
+        deque.insertAtFront(data);
+    }
+
+    // Insert at rear
+    public void insertRear(int data) {
+        deque.insertAtRear(data);
+    }
+
+    // Delete from front
+    public void deleteFront() {
+        deque.deleteFromFront();
+    }
+
+    // Delete from rear
+    public void deleteRear() {
+        deque.deleteFromRear();
+    }
+
+    // Display from front
+    public void displayFront() {
+        deque.displayFromFront();
+    }
+
+    // Display from rear
+    public void displayRear() {
+        deque.displayFromRear();
+    }
+}
+
+// Main class to handle user interaction
+public class DequeApp {
+    public static void main(String[] args) throws IOException {
+        BufferedReader inp = new BufferedReader(new InputStreamReader(System.in));
+        Deque q = new Deque();
+        String ch = "y";
+
+        while (ch.equalsIgnoreCase("y")) {
+            System.out.println("\n1. Insert at Front");
+            System.out.println("2. Insert at Rear");
+            System.out.println("3. Delete at Front");
+            System.out.println("4. Delete at Rear");
+            System.out.println("5. Display From Front");
+            System.out.println("6. Display From Rear");
+            System.out.print("Enter your choice: ");
+            int choice = Integer.parseInt(inp.readLine());
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the data: ");
+                    int frontData = Integer.parseInt(inp.readLine());
+                    q.insertFront(frontData);
+                    break;
+                case 2:
+                    System.out.print("Enter the data: ");
+                    int rearData = Integer.parseInt(inp.readLine());
+                    q.insertRear(rearData);
+                    break;
+                case 3:
+                    q.deleteFront();
+                    break;
+                case 4:
+                    q.deleteRear();
+                    break;
+                case 5:
+                    q.displayFront();
+                    break;
+                case 6:
+                    q.displayRear();
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+            System.out.print("Enter y to continue: ");
+            ch = inp.readLine();
+        }
+    }
+}
