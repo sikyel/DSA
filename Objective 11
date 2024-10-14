@@ -2,13 +2,11 @@ import java.util.Scanner;
 
 public class QuickSort {
 
-    // Method to perform quicksort
     public static void quick_srt(int array[], int lo, int hi) {
         if (lo >= hi) {
             return; // Exit condition
         }
 
-        // Calculate the middle index
         int mid = array[(lo + hi) / 2];
         int i = lo, j = hi;
 
@@ -31,7 +29,6 @@ public class QuickSort {
             }
         }
 
-        // Recursively apply quicksort to partitions
         if (lo < j) {
             quick_srt(array, lo, j);
         }
@@ -43,30 +40,24 @@ public class QuickSort {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Input array length
         System.out.print("Enter number of elements: ");
         int n = sc.nextInt();
 
-        // Initialize array
         int array[] = new int[n];
 
-        // Input array elements
         System.out.println("Enter the elements:");
         for (int i = 0; i < n; i++) {
             array[i] = sc.nextInt();
         }
 
-        // Display elements before sorting
         System.out.println("The elements before sorting are:");
         for (int i = 0; i < n; i++) {
             System.out.print(array[i] + " ");
         }
         System.out.println();
 
-        // Perform quick sort
         quick_srt(array, 0, n - 1);
 
-        // Display elements after sorting
         System.out.println("The elements after sorting are:");
         for (int i = 0; i < n; i++) {
             System.out.print(array[i] + " ");
