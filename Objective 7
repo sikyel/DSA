@@ -1,0 +1,230 @@
+// Step 2: Declare a class BSTNode
+class BSTNode {
+    int data;
+    BSTNode left, right;
+
+    // Step 4: Declare constructors (default and parameterized)
+    public BSTNode() {
+        data = 0;
+        left = right = null;
+    }
+
+    public BSTNode(int value) {
+        data = value;
+        left = right = null;
+    }
+
+    // Step 5-10: Getters and Setters for left, right, and data
+    public void setLeft(BSTNode left) {
+        this.left = left;
+    }
+
+    public void setRight(BSTNode right) {
+        this.right = right;
+    }
+
+    public BSTNode getLeft() {
+        return left;
+    }
+
+    public BSTNode getRight() {
+        return right;
+    }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+
+    public int getData() {
+        return data;
+    }
+}
+
+// Step 12: Declare another class BST
+class BST {
+    BSTNode root;
+
+    // Step 13: Declare the constructor
+    public BST() {
+        root = null;
+    }
+
+    // Step 14: Function to check if the tree is empty
+    public boolean isEmpty() {
+        return root == null;
+    }
+
+    // Step 15: Function to insert data
+    public void insert(int value) {
+        root = insertRec(root, value);
+    }
+
+    // Step 16: Function to insert data recursively
+    private BSTNode insertRec(BSTNode root, int value) {
+        if (root == null) {
+            root = new BSTNode(value);
+            return root;
+        }
+        if (value < root.data) {
+            root.left = insertRec(root.left, value);
+        } else if (value > root.data) {
+            root.right = insertRec(root.right, value);
+        }
+        return root;
+    }
+
+    // Step 17: Function to delete a node
+    public void delete(int value) {
+        root = deleteRec(root, value);
+    }
+
+    private BSTNode deleteRec(BSTNode root, int value) {
+        if (root == null) {
+            return root;
+        }
+
+        if (value < root.data) {
+            root.left = deleteRec(root.left, value);
+        } else if (value > root.data) {
+            root.right = deleteRec(root.right, value);
+        } else {
+            // Node with only one child or no child
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+
+            // Node with two children: Get inorder successor (smallest in the right subtree)
+            root.data = minValue(root.right);
+            root.right = deleteRec(root.right, root.data);
+        }
+        return root;
+    }
+
+    // Helper function to find the minimum value node
+    private int minValue(BSTNode root) {
+        int minVal = root.data;
+        while (root.left != null) {
+            minVal = root.left.data;
+            root = root.left;
+        }
+        return minVal;
+    }
+
+    // Step 18: Function to count the number of nodes
+    public int countNodes() {
+        return countRec(root);
+    }
+
+    // Step 19: Function to count nodes recursively
+    private int countRec(BSTNode node) {
+        if (node == null) {
+            return 0;
+        } else {
+            return 1 + countRec(node.left) + countRec(node.right);
+        }
+    }
+
+    // Step 20: Function to search for an element
+    public boolean search(int value) {
+        return searchRec(root, value);
+    }
+
+    // Step 21: Function to search recursively
+    private boolean searchRec(BSTNode root, int value) {
+        if (root == null) {
+            return false;
+        }
+        if (value == root.data) {
+            return true;
+        } else if (value < root.data) {
+            return searchRec(root.left, value);
+        } else {
+            return searchRec(root.right, value);
+        }
+    }
+
+    // Step 22: Function for inorder traversal
+    public void inorder() {
+        inorderRec(root);
+        System.out.println();
+    }
+
+    private void inorderRec(BSTNode root) {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.print(root.data + " ");
+            inorderRec(root.right);
+        }
+    }
+
+    // Step 23: Function for preorder traversal
+    public void preorder() {
+        preorderRec(root);
+        System.out.println();
+    }
+
+    private void preorderRec(BSTNode root) {
+        if (root != null) {
+            System.out.print(root.data + " ");
+            preorderRec(root.left);
+            preorderRec(root.right);
+        }
+    }
+
+    // Step 24: Function for postorder traversal
+    public void postorder() {
+        postorderRec(root);
+        System.out.println();
+    }
+
+    private void postorderRec(BSTNode root) {
+        if (root != null) {
+            postorderRec(root.left);
+            postorderRec(root.right);
+            System.out.print(root.data + " ");
+        }
+    }
+}
+
+// Step 25: Declare a main class BinarySearchTree
+public class BinarySearchTree {
+    // Step 26: Beginning the main function
+    public static void main(String[] args) {
+        // Step 27: Create an object of BST
+        BST tree = new BST();
+
+        // Step 28: Perform tree operations
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+
+        // Step 29: After display tree traversals
+        System.out.println("Inorder traversal:");
+        tree.inorder();
+
+        System.out.println("Preorder traversal:");
+        tree.preorder();
+
+        System.out.println("Postorder traversal:");
+        tree.postorder();
+
+        System.out.println("Is 40 in the tree? " + tree.search(40));
+
+        System.out.println("Total number of nodes: " + tree.countNodes());
+
+        // Delete a node
+        tree.delete(40);
+        System.out.println("Inorder traversal after deleting 40:");
+        tree.inorder();
+
+        System.out.println("Is the tree empty? " + tree.isEmpty());
+        
+        // Step 30: End
+    }
+}
