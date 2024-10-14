@@ -1,6 +1,5 @@
 import java.io.*;
 
-// Class representing the node of a doubly linked list
 class Node {
     int data;
     Node prev;
@@ -13,18 +12,15 @@ class Node {
     }
 }
 
-// Class representing the doubly linked list (Deque implementation)
 class DoubleLinkedList {
     private Node first;
     private Node last;
 
-    // Constructor to initialize the deque
     public DoubleLinkedList() {
         first = null;
         last = null;
     }
 
-    // Insert element at the front of the deque
     public void insertAtFront(int data) {
         Node newNode = new Node(data);
         if (first == null) {
@@ -37,7 +33,6 @@ class DoubleLinkedList {
         System.out.println("Inserted to Front: " + data);
     }
 
-    // Insert element at the rear of the deque
     public void insertAtRear(int data) {
         Node newNode = new Node(data);
         if (last == null) {
@@ -50,7 +45,6 @@ class DoubleLinkedList {
         System.out.println("Inserted to Rear: " + data);
     }
 
-    // Delete element from the front of the deque
     public void deleteFromFront() {
         if (first == null) {
             System.out.println("Deque is empty!");
@@ -65,7 +59,6 @@ class DoubleLinkedList {
         }
     }
 
-    // Delete element from the rear of the deque
     public void deleteFromRear() {
         if (last == null) {
             System.out.println("Deque is empty!");
@@ -80,7 +73,6 @@ class DoubleLinkedList {
         }
     }
 
-    // Display deque elements from front to rear
     public void displayFromFront() {
         if (first == null) {
             System.out.println("Deque is empty!");
@@ -95,7 +87,6 @@ class DoubleLinkedList {
         }
     }
 
-    // Display deque elements from rear to front
     public void displayFromRear() {
         if (last == null) {
             System.out.println("Deque is empty!");
@@ -111,42 +102,34 @@ class DoubleLinkedList {
     }
 }
 
-// Class to manage Deque operations
 class Deque {
     private DoubleLinkedList deque = new DoubleLinkedList();
 
-    // Insert at front
     public void insertFront(int data) {
         deque.insertAtFront(data);
     }
 
-    // Insert at rear
     public void insertRear(int data) {
         deque.insertAtRear(data);
     }
 
-    // Delete from front
     public void deleteFront() {
         deque.deleteFromFront();
     }
 
-    // Delete from rear
     public void deleteRear() {
         deque.deleteFromRear();
     }
 
-    // Display from front
     public void displayFront() {
         deque.displayFromFront();
     }
 
-    // Display from rear
     public void displayRear() {
         deque.displayFromRear();
     }
 }
 
-// Main class to handle user interaction
 public class DequeApp {
     public static void main(String[] args) throws IOException {
         BufferedReader inp = new BufferedReader(new InputStreamReader(System.in));
